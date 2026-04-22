@@ -1,10 +1,23 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { mockMenu, type Category } from '@/data/mock-db'
+import { createSupabaseClient } from '@/lib/supabase/client'
+import type { Category } from '@/data/mock-db'
 import { cn } from '@/lib/utils'
 import { Flame, Pizza, Leaf, IceCream } from 'lucide-react'
+
+type MenuItem = {
+  id: string
+  name: string
+  description: string
+  price: number
+  category: Category
+  isSignature: boolean
+  isLocal: boolean
+  isSoldOut: boolean
+  allergens: string[]
+}
 
 const categories: { id: Category; label: string; icon: React.ReactNode }[] = [
   { id: 'viandes', label: 'Viandes Maturées', icon: <Flame size={16} /> },
@@ -15,8 +28,98 @@ const categories: { id: Category; label: string; icon: React.ReactNode }[] = [
 
 export default function MenuSection() {
   const [activeCategory, setActiveCategory] = useState<Category>('viandes')
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([])
+  let supabase: ReturnType<typeof createSupabaseClient> | null = null
 
-  const filteredMenu = mockMenu.filter(item => item.category === activeCategory)
+  useEffect(() => {
+    // Only run this code on the client side
+    if (typeof window !== 'undefined') {
+      supabase = createSupabaseClient()
+      
+      const fetchMenu = async () => {
+        const { data, error } = await supabase!
+          .from('menu_items')
+          .select('*')
+          .order('created_at', { ascending: true })
+        
+        if (!error && data) {
+          setMenuItems(data.map(item => ({
+            id: item.id,
+            name: item.name,
+            description: item.description,
+            price: item.price,
+            category: item.category as Category,
+            isSignature: item.is_signature,
+            isLocal: item.is_local,
+            isSoldOut: item.is_sold_out,
+            allergens: item.allergens || []
+          })))
+        }
+      }
+
+      fetchMenu()
+
+      // Real-time subscription
+      const channel = supabase!
+        .channel('menu-items-changes')
+        .on(
+          'postgres_changes',
+          { event: 'INSERT', schema: 'public', table: 'menu_items' },
+          (payload) => {
+            const newItem = payload.new
+            setMenuItems((prev) => [...prev, {
+              id: newItem.id,
+              name: newItem.name,
+              description: newItem.description,
+              price: newItem.price,
+              category: newItem.category as Category,
+              isSignature: newItem.is_signature,
+              isLocal: newItem.is_local,
+              isSoldOut: newItem.is_sold_out,
+              allergens: newItem.allergens || []
+            }])
+          }
+        )
+        .on(
+          'postgres_changes',
+          { event: 'UPDATE', schema: 'public', table: 'menu_items' },
+          (payload) => {
+            const updatedItem = payload.new
+            setMenuItems((prev) => 
+              prev.map((item) => 
+                item.id === updatedItem.id ? {
+                  id: updatedItem.id,
+                  name: updatedItem.name,
+                  description: updatedItem.description,
+                  price: updatedItem.price,
+                  category: updatedItem.category as Category,
+                  isSignature: updatedItem.is_signature,
+                  isLocal: updatedItem.is_local,
+                  isSoldOut: updatedItem.is_sold_out,
+                  allergens: updatedItem.allergens || []
+                } : item
+              )
+            )
+          }
+        )
+        .on(
+          'postgres_changes',
+          { event: 'DELETE', schema: 'public', table: 'menu_items' },
+          (payload) => {
+            setMenuItems((prev) => 
+              prev.filter((item) => item.id !== payload.old.id)
+            )
+          }
+        )
+        .subscribe()
+
+      return () => {
+        supabase!.removeChannel(channel)
+      }
+    }
+  }, [])
+
+  const filteredMenu = menuItems.filter(item => item.category === activeCategory)
 
   return (
     <section id="menu" className="py-24 px-4 min-h-screen relative overflow-hidden bg-stone-50">

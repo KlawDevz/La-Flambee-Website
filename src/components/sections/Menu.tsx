@@ -19,34 +19,35 @@ export default function MenuSection() {
   const filteredMenu = mockMenu.filter(item => item.category === activeCategory)
 
   return (
-    <section id="menu" className="py-24 px-4 min-h-screen relative overflow-hidden bg-zinc-950">
+    <section id="menu" className="py-24 px-4 min-h-screen relative overflow-hidden bg-stone-50">
       <div className="max-w-4xl mx-auto">
         
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Notre Carte</h2>
-          <p className="text-zinc-400 max-w-xl mx-auto">
+          <span className="text-brand-600 font-sans font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Fait Maison</span>
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-6">Notre Carte</h2>
+          <p className="text-stone-600 font-serif max-w-xl mx-auto">
             Découvrez notre sélection de viandes d'exception affinées dans nos caves de maturation, et nos pizzas artisanales.
           </p>
         </div>
 
         {/* Category Filters (Pills) */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12 sticky top-24 z-20 bg-zinc-950/80 py-4 backdrop-blur-xl -mx-4 px-4 border-y border-white/5">
+        <div className="flex flex-wrap justify-center gap-3 mb-16 sticky top-24 z-20 bg-stone-50/90 py-4 backdrop-blur-xl -mx-4 px-4 border-y border-stone-200">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className={cn(
-                "relative flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300",
+                "relative flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 font-sans border border-transparent",
                 activeCategory === cat.id 
-                  ? "text-white" 
-                  : "text-zinc-400 hover:text-zinc-200 bg-white/5 hover:bg-white/10"
+                  ? "text-brand-900 border-brand-900/10 shadow-sm" 
+                  : "text-stone-500 hover:text-stone-800 bg-white hover:bg-stone-100 border-stone-200 shadow-sm"
               )}
             >
               {activeCategory === cat.id && (
                 <motion.div
                   layoutId="activeCategory"
-                  className="absolute inset-0 bg-brand-600 rounded-full -z-10 shadow-[0_0_20px_rgba(234,88,12,0.4)]"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  className="absolute inset-0 bg-brand-100 rounded-xl -z-10"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
               {cat.icon}
@@ -70,46 +71,42 @@ export default function MenuSection() {
                 transition={{ duration: 0.2 }}
                 key={item.id}
                 className={cn(
-                  "glass-panel p-6 flex flex-col justify-between group",
-                  item.isSoldOut && "opacity-60 grayscale-[50%]"
+                  "bg-white border border-stone-200 p-8 rounded-2xl shadow-sm flex flex-col justify-between group",
+                  item.isSoldOut && "opacity-60 grayscale-[30%]"
                 )}
               >
                 <div>
-                  <div className="flex justify-between items-start mb-2 gap-4">
-                    <h3 className="text-xl font-bold flex items-center gap-2">
+                  <div className="flex justify-between items-start mb-3 gap-4">
+                    <h3 className="text-xl font-serif text-brand-900 font-bold flex items-center gap-2 leading-tight">
                       {item.name}
                       {item.isSignature && (
-                        <span className="bg-brand-500/20 text-brand-500 text-[10px] px-2 py-1 rounded-full border border-brand-500/30 uppercase tracking-widest">
+                        <span className="bg-brand-50 text-brand-600 text-[10px] px-2 py-0.5 rounded font-sans uppercase tracking-widest border border-brand-200/50">
                           Signature
                         </span>
                       )}
                     </h3>
-                    <span className="text-brand-500 font-bold text-xl whitespace-nowrap">
+                    <span className="text-brand-600 font-bold font-sans whitespace-nowrap">
                       {item.price.toFixed(2).replace('.', ',')} €
                     </span>
                   </div>
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-4">
+                  <p className="text-stone-500 text-sm font-serif leading-relaxed mb-6">
                     {item.description}
                   </p>
                 </div>
                 
-                <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
-                  <div className="flex gap-1">
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-stone-100 font-sans">
+                  <div className="flex gap-2">
                     {item.allergens?.map(allergen => (
-                      <span key={allergen} className="text-[10px] text-zinc-500 bg-zinc-900 px-2 py-1 rounded border border-zinc-800">
+                      <span key={allergen} className="text-[10px] text-stone-500 bg-stone-100 px-2 py-1 rounded font-medium">
                         {allergen}
                       </span>
                     ))}
                   </div>
                   {item.isSoldOut ? (
-                    <span className="text-red-400 text-xs font-bold uppercase tracking-widest bg-red-400/10 px-3 py-1.5 rounded-full border border-red-400/20">
-                      Rupture
+                    <span className="text-rose-600 text-[10px] font-bold uppercase tracking-widest bg-rose-50 px-2 py-1 rounded border border-rose-100">
+                      Victime de son succès
                     </span>
-                  ) : (
-                    <span className="text-green-400 text-xs font-bold uppercase tracking-widest bg-green-400/10 px-3 py-1.5 rounded-full border border-green-400/20 opacity-0 group-hover:opacity-100 transition-opacity">
-                      Disponible
-                    </span>
-                  )}
+                  ) : null}
                 </div>
               </motion.div>
             ))}
@@ -117,8 +114,8 @@ export default function MenuSection() {
         </motion.div>
         
         {filteredMenu.length === 0 && (
-          <div className="text-center py-20 text-zinc-500">
-            Aucun plat disponible dans cette catégorie pour le moment.
+          <div className="text-center py-20 text-stone-400 font-serif italic">
+            La carte est en cours de renouvellement...
           </div>
         )}
 

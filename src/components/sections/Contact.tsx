@@ -3,39 +3,40 @@ import { MapPin, Map, PhoneCall, Clock, CheckCircle2 } from 'lucide-react'
 
 export default function ContactSection() {
   return (
-    <section className="py-24 px-4 bg-zinc-950 border-t border-white/5 relative overflow-hidden">
-      <div className="absolute top-1/2 right-1/4 w-[60vw] h-[60vw] bg-brand-900/10 rounded-full blur-[100px] -z-10" />
+    <section className="py-24 px-4 bg-stone-100 border-t border-stone-200 relative overflow-hidden">
+      <div className="absolute top-1/2 right-1/4 w-[60vw] h-[60vw] bg-brand-100 rounded-full blur-[100px] -z-10" />
 
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Accès & Contact</h2>
-          <p className="text-zinc-400 max-w-xl mx-auto">
-            Nous sommes situés au coeur de Mirepoix. N'hésitez pas à nous appeler pour réserver votre table.
+          <span className="text-brand-600 font-sans font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Venez nous voir</span>
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-6">Accès & Contact</h2>
+          <p className="text-stone-600 font-serif max-w-xl mx-auto">
+            Nous sommes situés au coeur de la bastide de Mirepoix. N'hésitez pas à nous appeler pour réserver votre table près de la cheminée.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Card Info */}
-          <div className="glass-panel p-8 flex flex-col justify-between">
+          <div className="bg-white border border-stone-200 p-8 flex flex-col justify-between rounded-2xl shadow-sm">
             <div>
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <MapPin className="text-brand-500" />
+              <h3 className="text-2xl font-serif font-bold text-brand-900 mb-8 flex items-center gap-3">
+                <MapPin className="text-brand-600" />
                 La Flambée
               </h3>
               
-              <div className="space-y-6 text-zinc-300">
+              <div className="space-y-8 font-sans">
                 <div className="flex items-start gap-4">
-                  <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                    <Map size={20} className="text-brand-400" />
+                  <div className="bg-stone-50 p-3 rounded-xl border border-stone-100 text-stone-600">
+                    <Map size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-white">Adresse</p>
-                    <p>12 Rue des Portes<br/>09500 Mirepoix, France</p>
+                    <p className="font-semibold text-stone-900 mb-1">Adresse</p>
+                    <p className="text-stone-600">12 Rue des Portes<br/>09500 Mirepoix</p>
                     <a 
                       href="https://maps.app.goo.gl/..." 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-brand-500 text-sm hover:underline mt-2 inline-block font-semibold"
+                      className="text-brand-600 text-sm hover:text-brand-500 hover:underline mt-2 inline-block font-bold"
                     >
                       Ouvrir dans Google Maps →
                     </a>
@@ -43,22 +44,22 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                    <Clock size={20} className="text-brand-400" />
+                  <div className="bg-stone-50 p-3 rounded-xl border border-stone-100 text-stone-600">
+                    <Clock size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-white">Horaires</p>
-                    <p>Midi : 12h00 - 14h00<br/>Soir : 19h00 - 22h00</p>
-                    <p className="text-xs text-brand-500 mt-2 bg-brand-500/10 px-2 py-1 rounded inline-block border border-brand-500/20">Fermé le Lundi et Mardi</p>
+                    <p className="font-semibold text-stone-900 mb-1">Horaires</p>
+                    <p className="text-stone-600">Midi : 12h00 - 14h00<br/>Soir : 19h00 - 22h00</p>
+                    <p className="text-[10px] uppercase font-bold tracking-widest text-brand-600 mt-3 bg-brand-50 px-2 py-1 rounded inline-block border border-brand-100">Fermé le Lundi et Mardi</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-white/10">
+            <div className="mt-12 pt-8 border-t border-stone-100">
               <a 
                 href="tel:+33500000000" 
-                className="w-full flex items-center justify-center gap-2 bg-zinc-100 hover:bg-white text-zinc-900 px-6 py-4 rounded-full font-bold transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                className="w-full flex items-center justify-center gap-2 bg-stone-900 hover:bg-black text-white px-6 py-4 rounded-xl font-medium transition-all active:scale-[0.98] shadow-md shadow-stone-900/10 font-sans"
               >
                 <PhoneCall size={20} />
                 05 00 00 00 00
@@ -68,20 +69,20 @@ export default function ContactSection() {
 
           {/* Feature List */}
           <div className="flex flex-col justify-center space-y-8 p-8">
-            <h3 className="text-3xl font-extrabold tracking-tighter mb-4 text-glow">L'expérience Flambée.</h3>
+            <h3 className="text-3xl font-serif text-brand-900 leading-tight mb-2">L'esprit de notre table.</h3>
             
-            <div className="space-y-6">
+            <div className="space-y-6 font-sans">
               {[
                 "Cave de maturation visible en salle.",
                 "Cuisson au feu de bois traditionnelle.",
                 "Ambiance chaleureuse avec cheminée.",
                 "Produits locaux et circuits courts."
               ].map((text, i) => (
-                <div key={i} className="flex items-center gap-4">
-                  <div className="bg-brand-500/20 text-brand-500 p-1.5 rounded-full border border-brand-500/30">
-                    <CheckCircle2 size={24} />
+                <div key={i} className="flex items-center gap-4 group">
+                  <div className="bg-brand-50 text-brand-600 p-2 rounded-full border border-brand-100 group-hover:scale-110 transition-transform">
+                    <CheckCircle2 size={20} strokeWidth={2.5} />
                   </div>
-                  <span className="text-lg font-medium text-zinc-300">{text}</span>
+                  <span className="text-stone-600 font-medium">{text}</span>
                 </div>
               ))}
             </div>

@@ -15,23 +15,43 @@ export default function Hero() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="flex flex-col items-center z-10 w-full max-w-3xl mx-auto"
       >
-        <span className="text-brand-600 font-sans font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-6 bg-brand-50 px-4 py-1.5 rounded-full border border-brand-100 shadow-sm">
+        <motion.span 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-brand-600 font-sans font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-6 bg-brand-50 px-4 py-1.5 rounded-full border border-brand-100 shadow-sm"
+        >
           Mirepoix (09)
-        </span>
+        </motion.span>
         
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-stone-900 mb-8 leading-tight">
+        <motion.h1 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-5xl md:text-7xl lg:text-8xl font-serif text-stone-900 mb-8 leading-tight"
+        >
           L'art de la <br className="hidden md:block"/> 
           <span className="text-brand-600 italic">viande maturée</span>.
-        </h1>
+        </motion.h1>
         
-        <p className="text-lg md:text-xl text-stone-600 mb-12 font-sans leading-relaxed px-4">
+        <motion.p 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="text-lg md:text-xl text-stone-600 mb-12 font-sans leading-relaxed px-4"
+        >
           Cuisine 100% fait-maison. Spécialité de viandes d'exception affinées sur place et pizzas authentiques au feu de bois.
-        </p>
+        </motion.p>
 
-        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto font-sans">
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.9 }}
+          className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto font-sans"
+        >
           <a 
             href="tel:+33500000000" 
-            className="flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-8 py-5 rounded-organic font-medium transition-all shadow-soft-md active:scale-[0.98]"
+            className="flex items-center justify-center gap-2 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white px-8 py-5 rounded-organic font-medium transition-all shadow-soft-md active:scale-[0.98]"
           >
             <PhoneCall size={20} />
             Réserver une table
@@ -42,7 +62,7 @@ export default function Hero() {
           >
             Voir la carte
           </a>
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   )

@@ -1,41 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  /* Couleurs de fond (Coquille d'oeuf / Parchemin) */
-  --color-stone-50: #FAF9F6;
-  --color-stone-100: #F5F4F0;
+  /* Base Neutre (Linen) */
+  --color-stone-50: #F9F7F2;
+  --color-stone-100: #F1EFE8;
   
-  /* Ardoise / Charbon (Textes et ombres) */
-  --color-stone-800: #292524;
-  --color-stone-900: #1C1917;
+  /* Charbon Chaud (#2C2C2C) */
+  --color-stone-800: #2C2C2C;
+  --color-stone-900: #1A1A1A;
   
-  /* Couleur Primaire (Braise / Terracotta) */
-  --color-brand-50: #FFF1F0;
-  --color-brand-100: #FFE1DE;
-  --color-brand-500: #E04E39; /* Action / Accentuation */
-  --color-brand-600: #C23A22; /* Hover */
-  --color-brand-900: #7A2211; /* Fond très foncé */
+  /* Accent Primaire (Feu - Dégradé subtil) */
+  --color-brand-50: #FFF5F3;
+  --color-brand-100: #FFE5E0;
+  --color-brand-500: #B33927; /* Burnt Sienna */
+  --color-brand-600: #9A3020; /* Hover */
+  --color-brand-900: #5C1B12; /* Oxblood */
 
-  /* Couleurs Secondaires (Statuts organiques) */
-  --color-success-500: #4B6E4F; /* Vert Sauge / Forêt */
-  --color-success-600: #3A553D;
-  --color-danger-500: #8B2C2C; /* Rouge sombre */
+  /* Touches de Nature (Mousse) */
+  --color-success-500: #4A5D4E;
+  --color-success-600: #3D4E41;
 
-  /* Typographie Duo */
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-inter);
+  /* Typographie Fine-Casual */
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-montserrat);
 }
 
 @utility shadow-soft {
-  box-shadow: 0 4px 20px -2px rgba(28, 25, 23, 0.05), 0 0 3px rgba(28, 25, 23, 0.02);
+  box-shadow: 0 4px 20px -2px rgba(44, 44, 44, 0.05), 0 0 3px rgba(44, 44, 44, 0.02);
 }
 
 @utility shadow-soft-md {
-  box-shadow: 0 10px 30px -5px rgba(28, 25, 23, 0.08), 0 0 5px rgba(28, 25, 23, 0.03);
+  box-shadow: 0 10px 30px -5px rgba(44, 44, 44, 0.08), 0 0 5px rgba(44, 44, 44, 0.03);
 }
 
 @utility rounded-organic {
   border-radius: 0.75rem;
+}
+
+@utility border-organic {
+  border-width: 0.5px;
+  border-color: rgba(44, 44, 44, 0.1);
+}
+
+@utility text-caps {
+  @apply uppercase tracking-widest font-bold;
 }
 
 @layer utilities {
@@ -61,7 +69,8 @@
 body {
   @apply bg-stone-50 text-stone-800 font-sans antialiased selection:bg-brand-500/20 overscroll-none;
   -webkit-tap-highlight-color: transparent;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  /* Grain de papier ultra-léger */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
 h1, h2, h3, h4, h5, h6 {

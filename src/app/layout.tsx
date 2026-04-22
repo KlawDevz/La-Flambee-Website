@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import TopBar from "@/components/ui/TopBar";
 import Navbar from "@/components/ui/Navbar";
 
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  weight: ["400", "500", "600", "700"],
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "La Flambée | Viandes maturées & Pizzas à Mirepoix",
@@ -19,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="scroll-smooth">
-      <body className={`${playfair.variable} ${inter.variable} font-sans bg-stone-50`}>
+      <body className={`${montserrat.variable} ${cormorant.variable} font-sans bg-stone-50`}>
         <TopBar />
         <Navbar />
         {children}

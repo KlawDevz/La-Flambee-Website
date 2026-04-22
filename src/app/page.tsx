@@ -1,12 +1,13 @@
 import Hero from '@/components/sections/Hero'
+import MenuSection from '@/components/sections/Menu'
+import ContactSection from '@/components/sections/Contact'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
-      <div id="menu" className="h-screen bg-zinc-950 flex items-center justify-center text-zinc-500">
-        (Section Menu en construction...)
-      </div>
+      <MenuSection />
+      <ContactSection />
     </main>
   )
 }

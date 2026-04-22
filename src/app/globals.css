@@ -1,22 +1,54 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #fdf8f5;
-  --color-brand-100: #faebd7;
-  --color-brand-500: #d9480f; /* Orange brulé / Braise */
-  --color-brand-600: #9a3412; /* Terre cuite / Brique */
-  --color-brand-900: #431407; /* Bois ancien / Brun foncé */
-  --color-stone-50: #fafaf9; /* Crème / Parchemin léger */
-  --color-stone-900: #1c1917; /* Anthracite chaleureux (pas noir pur) */
+  /* Couleurs de fond (Coquille d'oeuf / Parchemin) */
+  --color-stone-50: #FAF9F6;
+  --color-stone-100: #F5F4F0;
+  
+  /* Ardoise / Charbon (Textes et ombres) */
+  --color-stone-800: #292524;
+  --color-stone-900: #1C1917;
+  
+  /* Couleur Primaire (Braise / Terracotta) */
+  --color-brand-50: #FFF1F0;
+  --color-brand-100: #FFE1DE;
+  --color-brand-500: #E04E39; /* Action / Accentuation */
+  --color-brand-600: #C23A22; /* Hover */
+  --color-brand-900: #7A2211; /* Fond très foncé */
+
+  /* Couleurs Secondaires (Statuts organiques) */
+  --color-success-500: #4B6E4F; /* Vert Sauge / Forêt */
+  --color-success-600: #3A553D;
+  --color-danger-500: #8B2C2C; /* Rouge sombre */
+
+  /* Typographie Duo */
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-inter);
+}
+
+@utility shadow-soft {
+  box-shadow: 0 4px 20px -2px rgba(28, 25, 23, 0.05), 0 0 3px rgba(28, 25, 23, 0.02);
+}
+
+@utility shadow-soft-md {
+  box-shadow: 0 10px 30px -5px rgba(28, 25, 23, 0.08), 0 0 5px rgba(28, 25, 23, 0.03);
+}
+
+@utility rounded-organic {
+  border-radius: 0.75rem;
 }
 
 @layer utilities {
   .glass {
-    @apply bg-stone-50/90 backdrop-blur-md border-b border-stone-200 shadow-sm;
+    @apply bg-stone-50/95 backdrop-blur-md border-b border-stone-200/50 shadow-soft;
   }
   .glass-panel {
-    @apply bg-white border border-stone-200 rounded-lg shadow-md transition-all duration-300;
+    @apply bg-white border border-stone-100 rounded-organic shadow-soft transition-all duration-300;
   }
+  .glass-panel:hover {
+    @apply shadow-soft-md border-stone-200;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -24,13 +56,18 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .texture-bg {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-  }
 }
 
 body {
-  @apply bg-stone-50 text-stone-900 antialiased selection:bg-brand-500/30 overscroll-none;
+  @apply bg-stone-50 text-stone-800 font-sans antialiased selection:bg-brand-500/20 overscroll-none;
   -webkit-tap-highlight-color: transparent;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-serif text-stone-900;
+}
+
+p, span, a, button {
+  @apply font-sans;
 }

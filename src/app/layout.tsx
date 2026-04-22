@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Lora } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import TopBar from "@/components/ui/TopBar";
 import Navbar from "@/components/ui/Navbar";
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
-const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "La Flambée | Viandes maturées & Pizzas à Mirepoix",
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="scroll-smooth">
-      <body className={`${playfair.variable} ${lora.variable} font-sans`}>
+      <body className={`${playfair.variable} ${inter.variable} font-sans bg-stone-50`}>
         <TopBar />
         <Navbar />
         {children}

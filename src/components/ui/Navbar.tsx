@@ -11,7 +11,8 @@ export default function Navbar() {
     // Only run this code on the client side
     if (typeof window !== 'undefined') {
       const supabase = createSupabaseClient()
-      
+      if (!supabase) return
+
       const fetchStatus = async () => {
         const { data, error } = await supabase
           .from('restaurant_status')

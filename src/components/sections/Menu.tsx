@@ -29,19 +29,19 @@ const categories: { id: Category; label: string; icon: React.ReactNode }[] = [
 export default function MenuSection() {
   const [activeCategory, setActiveCategory] = useState<Category>('viandes')
   const [menuItems, setMenuItems] = useState<MenuItem[]>([])
-  let supabase: ReturnType<typeof createSupabaseClient> | null = null
 
   useEffect(() => {
     // Only run this code on the client side
     if (typeof window !== 'undefined') {
-      supabase = createSupabaseClient()
-      
+      const supabase = createSupabaseClient()
+      if (!supabase) return
+
       const fetchMenu = async () => {
-        const { data, error } = await supabase!
+        const { data, error } = await supabase
           .from('menu_items')
           .select('*')
           .order('created_at', { ascending: true })
-        
+
         if (!error && data) {
           setMenuItems(data.map(item => ({
             id: item.id,
@@ -60,7 +60,7 @@ export default function MenuSection() {
       fetchMenu()
 
       // Real-time subscription
-      const channel = supabase!
+      const channel = supabase
         .channel('menu-items-changes')
         .on(
           'postgres_changes',
@@ -85,8 +85,8 @@ export default function MenuSection() {
           { event: 'UPDATE', schema: 'public', table: 'menu_items' },
           (payload) => {
             const updatedItem = payload.new
-            setMenuItems((prev) => 
-              prev.map((item) => 
+            setMenuItems((prev) =>
+              prev.map((item) =>
                 item.id === updatedItem.id ? {
                   id: updatedItem.id,
                   name: updatedItem.name,
@@ -106,7 +106,7 @@ export default function MenuSection() {
           'postgres_changes',
           { event: 'DELETE', schema: 'public', table: 'menu_items' },
           (payload) => {
-            setMenuItems((prev) => 
+            setMenuItems((prev) =>
               prev.filter((item) => item.id !== payload.old.id)
             )
           }
@@ -114,7 +114,7 @@ export default function MenuSection() {
         .subscribe()
 
       return () => {
-        supabase!.removeChannel(channel)
+        supabase.removeChannel(channel)
       }
     }
   }, [])

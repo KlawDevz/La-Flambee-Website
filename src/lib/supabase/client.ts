@@ -1,8 +1,13 @@
 import { createBrowserClient } from '@supabase/ssr'
 import { Database } from '@/types/supabase'
 
-export const createSupabaseClient = () => 
-  createBrowserClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+export const createSupabaseClient = () => {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!url || !anonKey) {
+    return null
+  }
+
+  return createBrowserClient<Database>(url, anonKey)
+}

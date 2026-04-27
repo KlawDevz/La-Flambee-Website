@@ -4,14 +4,11 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createSupabaseClient } from '@/lib/supabase/client'
 import type { MenuItem } from '@/types/menu'
-import type { Database } from '@/types/supabase'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Switch } from '@/components/ui/Switch'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
-
-type SupabaseMenuItem = Database['public']['Tables']['menu_items']['Row']
 
 export default function AdminDashboard() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([])
@@ -27,64 +24,65 @@ export default function AdminDashboard() {
     allergens: [] 
   })
   const router = useRouter()
-  let supabase: ReturnType<typeof createSupabaseClient> | null = null
 
   // Check auth on mount
   useEffect(() => {
     // Only run this code on the client side
     if (typeof window !== 'undefined') {
-      supabase = createSupabaseClient()
-      
+      const supabase = createSupabaseClient()
+      if (!supabase) return
+
       const checkAuth = async () => {
-        const { data: { session } } = await supabase!.auth.getSession()
+        const { data: { session } } = await supabase.auth.getSession()
         if (!session) {
           router.push('/login')
         }
       }
       checkAuth()
-      
+
       const fetchInitialData = async () => {
         // Fetch menu items
-        const { data: menuData, error: menuError } = await supabase!
+        const { data: menuData, error: menuError } = await supabase
           .from('menu_items')
           .select('*')
           .order('created_at', { ascending: true })
-        
+
         if (!menuError && menuData) {
           setMenuItems(menuData.map(item => ({
             id: item.id,
             name: item.name,
             description: item.description,
             price: item.price,
-            category: item.category as any,
+            category: item.category as MenuItem['category'],
             isSignature: item.is_signature,
             isLocal: item.is_local,
             isSoldOut: item.is_sold_out,
             allergens: item.allergens || []
           })))
         }
-        
+
         // Fetch restaurant status
-        const { data: statusData, error: statusError } = await supabase!
+        const { data: statusData, error: statusError } = await supabase
           .from('restaurant_status')
           .select('is_open')
           .limit(1)
           .single()
-        
+
         if (!statusError && statusData) {
           setIsRestaurantOpen(statusData.is_open)
         }
       }
-      
+
       fetchInitialData()
     }
   }, [router])
 
   const handleAddItem = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
+    const supabase = createSupabaseClient()
     if (!supabase) return
-    
+
     const { data, error } = await supabase
       .from('menu_items')
       .insert([{
@@ -106,7 +104,7 @@ export default function AdminDashboard() {
         name: insertedItem.name,
         description: insertedItem.description,
         price: insertedItem.price,
-        category: insertedItem.category as any,
+        category: insertedItem.category as MenuItem['category'],
         isSignature: insertedItem.is_signature,
         isLocal: insertedItem.is_local,
         isSoldOut: insertedItem.is_sold_out,
@@ -126,10 +124,11 @@ export default function AdminDashboard() {
   }
 
   const handleToggleStatus = async () => {
+    const supabase = createSupabaseClient()
     if (!supabase) return
-    
+
     const newStatus = !isRestaurantOpen
-    
+
     const { data, error } = await supabase
       .from('restaurant_status')
       .update({ is_open: newStatus })
@@ -142,8 +141,9 @@ export default function AdminDashboard() {
   }
 
   const handleDeleteItem = async (id: string) => {
+    const supabase = createSupabaseClient()
     if (!supabase) return
-    
+
     const { error } = await supabase
       .from('menu_items')
       .delete()
@@ -159,7 +159,10 @@ export default function AdminDashboard() {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-12">
           <h1 className="text-3xl font-serif text-stone-900">Dashboard Admin</h1>
-          <Button variant="outline" onClick={() => supabase?.auth.signOut()}>
+          <Button variant="outline" onClick={() => {
+            const supabase = createSupabaseClient()
+            supabase?.auth.signOut()
+          }}>
             Déconnexion
           </Button>
         </div>
@@ -217,7 +220,7 @@ export default function AdminDashboard() {
                   <label className="block text-sm font-medium text-stone-700 mb-2">Catégorie</label>
                   <select
                     value={newItem.category}
-                    onChange={(e) => setNewItem({...newItem, category: e.target.value as any})}
+                    onChange={(e) => setNewItem({...newItem, category: e.target.value as MenuItem['category']})}
                     className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                   >
                     <option value="viandes">Viandes Maturées</option>

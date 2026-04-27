@@ -3,7 +3,7 @@ import { MapPin, Map, PhoneCall, Clock, CheckCircle2 } from 'lucide-react'
 
 export default function ContactSection() {
   return (
-    <section className="py-24 px-4 bg-[linear-gradient(160deg,rgba(239,233,222,0.72),rgba(255,255,255,0.86))] border-t border-stone-200/70 relative overflow-hidden">
+    <section className="py-24 px-4 bg-stone-100 border-t border-stone-200 relative overflow-hidden">
       <div className="absolute top-1/2 right-1/4 w-[60vw] h-[60vw] bg-brand-100 rounded-full blur-[100px] -z-10" />
 
       <div className="max-w-4xl mx-auto">
@@ -11,7 +11,7 @@ export default function ContactSection() {
           <span className="text-brand-600 font-sans font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Venez nous voir</span>
           <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-6">Accès & Contact</h2>
           <p className="text-stone-600 font-serif max-w-xl mx-auto">
-            Nous sommes situés au coeur de la bastide de Mirepoix. N&apos;hésitez pas à nous appeler pour réserver votre table près de la cheminée.
+            Nous sommes situés au coeur de la bastide de Mirepoix. N'hésitez pas à nous appeler pour réserver votre table près de la cheminée.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export default function ContactSection() {
             <div className="mt-12 pt-8 border-t border-stone-100">
               <a 
                 href="tel:+33500000000" 
-                className="w-full btn-primary-premium active:scale-[0.98]"
+                className="w-full flex items-center justify-center gap-2 bg-stone-900 hover:bg-black text-white px-6 py-4 rounded-xl font-medium transition-all active:scale-[0.98] shadow-md shadow-stone-900/10 font-sans"
               >
                 <PhoneCall size={20} />
                 05 00 00 00 00
@@ -69,7 +69,7 @@ export default function ContactSection() {
 
           {/* Feature List */}
           <div className="flex flex-col justify-center space-y-8 p-8">
-            <h3 className="text-3xl font-serif text-brand-900 leading-tight mb-2">L&apos;esprit de notre table.</h3>
+            <h3 className="text-3xl font-serif text-brand-900 leading-tight mb-2">L'esprit de notre table.</h3>
             
             <div className="space-y-6 font-sans">
               {[

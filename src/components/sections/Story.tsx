@@ -3,10 +3,10 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const storyImages = [
-  { src: "/placeholder.svg?height=400&width=600", alt: "Davy aux USA" },
-  { src: "/placeholder.svg?height=400&width=600", alt: "Premier feu de bois à Mirepoix" },
-  { src: "/placeholder.svg?height=400&width=600", alt: "Salle du restaurant La Flambée" },
-  { src: "/placeholder.svg?height=400&width=600", alt: "Pizza sortant du four" },
+  { src: "/images/story-salle.jpg", alt: "Salle du restaurant La Flambée" },
+  { src: "/images/story-terrasse.jpg", alt: "Terrasse à Mirepoix" },
+  { src: "/images/story-entrecote.jpg", alt: "Entrecôte et frites maison" },
+  { src: "/images/story-dessert.jpg", alt: "Profiteroles au chocolat" },
 ]
 
 export default function Story() {

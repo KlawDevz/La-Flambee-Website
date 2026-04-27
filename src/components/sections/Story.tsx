@@ -11,13 +11,13 @@ const storyImages = [
 
 export default function Story() {
   return (
-    <section className="py-24 px-4 bg-white border-t border-stone-100">
+    <section className="py-24 px-4 border-t border-stone-100/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(255,255,255,0.78))] backdrop-blur-sm">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <span className="text-brand-600 font-sans font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Notre histoire</span>
-          <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6">L'Esprit La Flambée</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6 tracking-tight">L&apos;Esprit La Flambée</h2>
           <p className="text-stone-600 font-sans max-w-2xl mx-auto leading-relaxed">
-            De l'Arizona à la bastide de Mirepoix, découvrez le parcours de Davy qui a su allier sa passion pour la viande maturée et le feu de bois à la douceur de vivre ariégeoise.
+            De l&apos;Arizona à la bastide de Mirepoix, découvrez le parcours de Davy qui a su allier sa passion pour la viande maturée et le feu de bois à la douceur de vivre ariégeoise.
           </p>
         </div>
 
@@ -31,13 +31,13 @@ export default function Story() {
           >
             <p className="text-stone-700 leading-relaxed">
               <span className="font-serif text-5xl float-left mr-4 text-brand-600 leading-none">A</span>
-             près 15 ans à perfectionner l'art de la viande maturée dans les ranchs du désert américain, Davy a ressenti le besoin de revenir aux racines. C'est en 2022 qu'il a posé ses valises à Mirepoix, attiré par l'authenticité de la bastide et la richesse des produits locaux.
+             près 15 ans à perfectionner l&apos;art de la viande maturée dans les ranchs du désert américain, Davy a ressenti le besoin de revenir aux racines. C&apos;est en 2022 qu&apos;il a posé ses valises à Mirepoix, attiré par l&apos;authenticité de la bastide et la richesse des produits locaux.
             </p>
             <p className="text-stone-700 leading-relaxed">
-              Avec Julie, son associée et amie d'enfance, ils ont imaginé un lieu unique où la tradition du feu de bois rencontre la précision de la maturation. Chaque morceau de viande repose pendant des semaines dans leur cave voûtée, avant d'être cuit à la perfection sur un feu de chêne local.
+              Avec Julie, son associée et amie d&apos;enfance, ils ont imaginé un lieu unique où la tradition du feu de bois rencontre la précision de la maturation. Chaque morceau de viande repose pendant des semaines dans leur cave voûtée, avant d&apos;être cuit à la perfection sur un feu de chêne local.
             </p>
             <p className="text-stone-700 leading-relaxed">
-              La Flambée, c'est aussi une promesse : celle d'un repas fait main, avec des circuits courts, dans une ambiance chaleureuse et conviviale. Une halte gourmande entre Toulouse et Foix, au rythme du bois qui crépite.
+              La Flambée, c&apos;est aussi une promesse : celle d&apos;un repas fait main, avec des circuits courts, dans une ambiance chaleureuse et conviviale. Une halte gourmande entre Toulouse et Foix, au rythme du bois qui crépite.
             </p>
           </motion.div>
 

@@ -16,7 +16,7 @@ export default function Home() {
       <div className="md:hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
         <a 
           href="tel:+33500000000" 
-          className="flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-6 py-4 rounded-full font-medium transition-all shadow-lg shadow-brand-500/30 active:scale-[0.98]"
+          className="btn-primary-premium rounded-full px-6 py-4 shadow-lg shadow-brand-600/30 active:scale-[0.98]"
         >
           <PhoneCall size={20} />
           Réserver

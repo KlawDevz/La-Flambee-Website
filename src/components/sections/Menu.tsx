@@ -122,7 +122,7 @@ export default function MenuSection() {
   const filteredMenu = menuItems.filter(item => item.category === activeCategory)
 
   return (
-    <section id="menu" className="py-24 px-4 min-h-screen relative overflow-hidden bg-stone-50">
+    <section id="menu" className="py-24 px-4 min-h-screen relative overflow-hidden bg-[linear-gradient(180deg,rgba(248,245,239,0.9),rgba(255,255,255,0.72))]">
       <div className="max-w-4xl mx-auto">
         
         <motion.div 
@@ -132,9 +132,9 @@ export default function MenuSection() {
           className="text-center mb-16"
         >
           <span className="text-brand-600 font-sans font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Fait Maison</span>
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-6">Notre Carte</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-900 mb-6 tracking-tight">Notre Carte</h2>
           <p className="text-stone-600 font-serif max-w-xl mx-auto">
-            Découvrez notre sélection de viandes d'exception affinées dans nos caves de maturation, et nos pizzas artisanales.
+            Découvrez notre sélection de viandes d&apos;exception affinées dans nos caves de maturation, et nos pizzas artisanales.
           </p>
         </motion.div>
 
